@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10223A" />
+  <title>JSolutions | Sign in</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310223A'/%3E%3Cpath d='M19.5 8.5v9.7c0 2.6-1.9 4.3-4.4 4.3-1.6 0-2.9-.6-3.8-1.6' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <div class="shell">
+
+    <!-- Left: brand panel (hidden on small screens) -->
+    <aside class="brand">
+      <div class="brand-top">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M19.5 8.5v9.7c0 2.6-1.9 4.3-4.4 4.3-1.6 0-2.9-.6-3.8-1.6" fill="none" stroke-width="2.6" stroke-linecap="round"/></svg>
+        <span>JSolutions</span>
+      </div>
+      <div class="brand-body">
+        <h2>Secure sign-in for your JSolutions account</h2>
+        <ul class="facts">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Email verification when you create an account</span>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Passwords are checked without being sent over the network</span>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Two-step verification with an authenticator app</span>
+          </li>
+        </ul>
+      </div>
+      <p class="brand-foot">Sign-in secured by Amazon Cognito</p>
+    </aside>
+
+    <!-- Right: the forms -->
+    <main class="panel">
+      <div class="panel-inner">
+        <div class="mobile-brand">
+          <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M19.5 8.5v9.7c0 2.6-1.9 4.3-4.4 4.3-1.6 0-2.9-.6-3.8-1.6" fill="none" stroke-width="2.6" stroke-linecap="round"/></svg>
+          <span>JSolutions</span>
+        </div>
+
+        <h1 id="title">Sign in</h1>
+        <p id="message" class="message" role="alert"></p>
+
+        <!-- Create account -->
+        <form id="screen-signup" class="screen" hidden>
+          <p class="lede">Create an account with your email. We will send a 6-digit code to confirm it.</p>
+          <div class="field">
+            <label for="su-email">Email</label>
+            <input id="su-email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="su-password">Password</label>
+            <div class="pw">
+              <input id="su-password" type="password" autocomplete="new-password" minlength="8" required />
+              <button type="button" class="reveal" data-reveal="su-password" aria-label="Show password">Show</button>
+            </div>
+            <p class="hint">At least 8 characters, with upper case, lower case, a number and a symbol.</p>
+          </div>
+          <button class="btn primary" type="submit">Create account</button>
+          <p class="alt">Already have an account? <a href="#" data-go="login">Sign in</a></p>
+        </form>
+
+        <!-- Verify email -->
+        <form id="screen-verify" class="screen" hidden>
+          <p class="lede">Enter the 6-digit code we sent to your email.</p>
+          <div class="field">
+            <label for="vf-code">Verification code</label>
+            <input id="vf-code" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required />
+          </div>
+          <button class="btn primary" type="submit">Verify email</button>
+          <p class="alt">Did not get a code? <a href="#" id="resend">Send a new code</a></p>
+        </form>
+
+        <!-- Sign in -->
+        <form id="screen-login" class="screen" hidden>
+          <p class="lede">Welcome back. Sign in to continue.</p>
+          <div class="field">
+            <label for="li-email">Email</label>
+            <input id="li-email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="li-password">Password</label>
+              <a href="#" data-go="forgot">Forgot password?</a>
+            </div>
+            <div class="pw">
+              <input id="li-password" type="password" autocomplete="current-password" required />
+              <button type="button" class="reveal" data-reveal="li-password" aria-label="Show password">Show</button>
+            </div>
+          </div>
+          <button class="btn primary" type="submit">Sign in</button>
+          <p class="alt">New here? <a href="#" data-go="signup">Create an account</a></p>
+        </form>
+
+        <!-- Two-step verification -->
+        <form id="screen-otp" class="screen" hidden>
+          <p class="lede">Enter the 6-digit code from your authenticator app.</p>
+          <div id="qr-box" class="qr" hidden>
+            <img id="qr" alt="QR code for your authenticator app" width="168" height="168" />
+            <p class="hint">Scan this code with Google Authenticator, Microsoft Authenticator or a similar app. If you cannot scan it, enter this key instead:</p>
+            <code id="secret"></code>
+          </div>
+          <div class="field">
+            <label for="otp-code">Verification code</label>
+            <input id="otp-code" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required />
+          </div>
+          <button class="btn primary" type="submit">Verify</button>
+        </form>
+
+        <!-- Forgot password -->
+        <form id="screen-forgot" class="screen" hidden>
+          <p class="lede">Enter your email and we will send a code to reset your password.</p>
+          <div class="field">
+            <label for="fp-email">Email</label>
+            <input id="fp-email" type="email" autocomplete="email" required />
+          </div>
+          <button class="btn primary" type="submit">Send reset code</button>
+          <p class="alt"><a href="#" data-go="login">Back to sign in</a></p>
+        </form>
+
+        <!-- Reset password -->
+        <form id="screen-reset" class="screen" hidden>
+          <p class="lede">Enter the code we emailed you and choose a new password.</p>
+          <div class="field">
+            <label for="rp-code">Verification code</label>
+            <input id="rp-code" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required />
+          </div>
+          <div class="field">
+            <label for="rp-password">New password</label>
+            <div class="pw">
+              <input id="rp-password" type="password" autocomplete="new-password" required />
+              <button type="button" class="reveal" data-reveal="rp-password" aria-label="Show password">Show</button>
+            </div>
+          </div>
+          <button class="btn primary" type="submit">Set new password</button>
+        </form>
+
+        <!-- Signed in -->
+        <section id="screen-home" class="screen" hidden>
+          <div class="account">
+            <span id="avatar" class="avatar" aria-hidden="true"></span>
+            <div>
+              <p class="account-label">Signed in as</p>
+              <p id="who" class="account-email"></p>
+            </div>
+          </div>
+
+          <form id="change-pw" class="block">
+            <h2>Change password</h2>
+            <div class="field">
+              <label for="cp-old">Current password</label>
+              <div class="pw">
+                <input id="cp-old" type="password" autocomplete="current-password" required />
+                <button type="button" class="reveal" data-reveal="cp-old" aria-label="Show password">Show</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cp-new">New password</label>
+              <div class="pw">
+                <input id="cp-new" type="password" autocomplete="new-password" required />
+                <button type="button" class="reveal" data-reveal="cp-new" aria-label="Show password">Show</button>
+              </div>
+            </div>
+            <button class="btn primary" type="submit">Update password</button>
+          </form>
+
+          <button id="logout" type="button" class="btn ghost">Sign out</button>
+        </section>
+      </div>
+
+      <footer class="legal">&copy; 2026 JSolutions</footer>
+    </main>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

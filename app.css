@@ -1,0 +1,304 @@
+:root {
+  --ink: #10223a;
+  --blue: #1f5fd1;
+  --blue-hover: #1a4fb0;
+  --text: #142033;
+  --slate: #5b6678;
+  --line: #d5dbe5;
+  --field: #8b97ab;
+  --mist: #f4f6f9;
+  --err: #b3261e;
+  --err-bg: #fdecea;
+  --ok: #1b7f4b;
+  --ok-bg: #e8f5ee;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- Layout ---------- */
+.shell {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Brand panel ---------- */
+.brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 56px;
+  background: var(--ink);
+  color: #fff;
+}
+.brand-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.brand h2 {
+  max-width: 14em;
+  margin: 0;
+  font-size: clamp(1.8rem, 2.7vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.facts {
+  display: grid;
+  gap: 16px;
+  max-width: 26rem;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.facts li {
+  display: flex;
+  gap: 12px;
+  color: #c9d4e5;
+}
+.facts svg {
+  flex: none;
+  margin-top: 2px;
+  color: #7fb0ff;
+}
+.brand-foot {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #8fa2bf;
+}
+
+/* ---------- Logo mark ---------- */
+.mark { width: 32px; height: 32px; flex: none; }
+.mark rect { fill: var(--mark-bg); }
+.mark path { stroke: var(--mark-fg); }
+.brand .mark { --mark-bg: #fff; --mark-fg: var(--ink); }
+.mobile-brand .mark { --mark-bg: var(--ink); --mark-fg: #fff; }
+
+/* ---------- Form panel ---------- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 24px 24px;
+}
+.panel-inner {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+.mobile-brand {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+h1 {
+  margin: 0 0 8px;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+h2 { font-size: 1.05rem; }
+.lede {
+  margin: 0 0 24px;
+  color: var(--slate);
+}
+
+/* ---------- Message banner ---------- */
+.message {
+  margin: 12px 0 4px;
+  padding: 12px 14px;
+  border-left: 4px solid;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.message:empty { display: none; }
+.message.ok { background: var(--ok-bg); border-color: var(--ok); color: #12583a; }
+.message.error { background: var(--err-bg); border-color: var(--err); color: #8c1d18; }
+
+/* ---------- Fields ---------- */
+.field { margin-bottom: 18px; }
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.label-row label { margin: 0; }
+.label-row a { font-size: 0.875rem; }
+
+input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--field);
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  color: var(--text);
+}
+input.code {
+  font-size: 1.5rem;
+  letter-spacing: 0.35em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+input:focus-visible {
+  border-color: var(--blue);
+  outline: 3px solid rgba(31, 95, 209, 0.35);
+  outline-offset: 0;
+}
+.hint {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+.pw { position: relative; }
+.pw input { padding-right: 68px; }
+.reveal {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+/* ---------- Buttons and links ---------- */
+.btn {
+  width: 100%;
+  height: 46px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.btn.primary { background: var(--blue); color: #fff; }
+.btn.primary:hover { background: var(--blue-hover); }
+.btn.ghost { background: #fff; border-color: var(--field); color: var(--text); }
+.btn.ghost:hover { background: var(--mist); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.btn:focus-visible,
+.reveal:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(31, 95, 209, 0.45);
+  outline-offset: 2px;
+}
+
+a { color: var(--blue); font-weight: 500; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.alt {
+  margin: 20px 0 0;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--slate);
+}
+
+/* ---------- Authenticator QR ---------- */
+.qr {
+  margin: 0 0 20px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--mist);
+  text-align: center;
+}
+.qr img {
+  display: block;
+  margin: 0 auto 12px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+}
+#secret {
+  display: block;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+/* ---------- Signed-in screen ---------- */
+.account {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.account-label { margin: 0; font-size: 0.8rem; color: var(--slate); }
+.account-email { margin: 2px 0 0; font-weight: 600; word-break: break-all; }
+.block {
+  margin-bottom: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.block h2 { margin: 0 0 16px; }
+
+.legal {
+  margin-top: 32px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--slate);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 880px) {
+  .shell { grid-template-columns: 1fr; }
+  .brand { display: none; }
+  .mobile-brand { display: flex; }
+  .panel { padding: 32px 20px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
